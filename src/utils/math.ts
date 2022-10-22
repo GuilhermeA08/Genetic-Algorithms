@@ -5,11 +5,12 @@ import { Pair } from "@src/types/Pair";
  * @returns Resultado da avaliação
  */
 export const calculeF = (gene: Pair): number => {
-  gene.X = gene.X ** 3;
-  gene.Y = gene.Y ** 4;
+  let geneX, geneY;
+  geneX = gene.X ** 3;
+  geneY = gene.Y ** 4;
 
-  gene.Y = 2 * gene.Y;
+  geneY = 2 * geneY;
 
-  const result = Math.sqrt(gene.X + gene.Y);
+  const result = Math.sqrt(geneX + geneY);
   return result;
 };
