@@ -11,4 +11,7 @@ export type Pair = {
    * Entrada Y da função
    */
   Y: number;
+
+  aptitude?: number;
+  probability?: number;
 };
