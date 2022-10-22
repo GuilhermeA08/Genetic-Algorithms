@@ -6,11 +6,13 @@ import { Pair } from "@src/types/Pair";
  * @param mutationRate Taxa de mutação
  * @returns População com pais e filhos
  */
-export const generateKids = (fathers: Pair[], mutationRate: number): Pair[] => {
+export const generateKids = (fathers: Pair[], mutationRate: number) => {
   try {
-    if (fathers.length % 0 !== 0) throw new Error("O número de pais de ser Par!");
+    if (fathers.length % 2 !== 0) throw new Error("O número de pais de ser Par!");
 
-    for (let i = 0; i < fathers.length; i += 2) {
+    const length = fathers.length;
+
+    for (let i = 0; i < length; i += 2) {
       const resultAND: Pair = {
         X: fathers[i].X & fathers[i + 1].X,
         Y: fathers[i].Y & fathers[i + 1].Y,
@@ -27,14 +29,11 @@ export const generateKids = (fathers: Pair[], mutationRate: number): Pair[] => {
 
     for (const key in fathers) {
       if (Math.floor(Math.random() * 100) + 1 <= mutationRate) {
-        fathers[key] = mutation(fathers[key]);
+        mutation(fathers[key]);
       }
     }
-
-    return fathers;
   } catch (error) {
     console.log(error);
-    return fathers;
   }
 };
 
@@ -43,9 +42,7 @@ export const generateKids = (fathers: Pair[], mutationRate: number): Pair[] => {
  * @param gene Gene que ira sofrer a mutação
  * @returns Gene com mutação
  */
-export const mutation = (gene: Pair): Pair => {
+export const mutation = (gene: Pair) => {
   gene.X = gene.X & 1;
   gene.Y = gene.Y & 1;
-
-  return gene;
 };
