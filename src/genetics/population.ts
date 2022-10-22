@@ -1,5 +1,10 @@
 import { Pair } from "@src/types/Pair";
 
+/**
+ * Gera população inicial
+ * @param numberPopulation Quantidade de indivíduos na População inicial
+ * @returns População - array de Pair
+ */
 export const generatePopulation = (numberPopulation: number): Pair[] => {
   const pairs: Pair[] = [];
 
@@ -12,3 +17,6 @@ export const generatePopulation = (numberPopulation: number): Pair[] => {
 
   return pairs;
 };
+
+//TODO: Implementar função
+export const populationRating = () => {};
