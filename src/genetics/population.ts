@@ -1,4 +1,5 @@
 import { Pair } from "@src/types/Pair";
+import { calculeF } from "../utils/math";
 
 /**
  * Gera população inicial
@@ -18,5 +19,32 @@ export const generatePopulation = (numberPopulation: number): Pair[] => {
   return pairs;
 };
 
-//TODO: Implementar função
-export const populationRating = () => {};
+export const populationRating = (population: Pair[]) => {
+  //Calculando a aptidão de cada gene
+  population.forEach((gene) => {
+    gene.aptitude = calculeF(gene);
+  });
+
+  //Calculando a probabilidade de cada gene
+
+  //Divisor
+  let divider = 0;
+  for (let i = 0; i < population.length; i++) {
+    if (population[i].aptitude !== 0) divider += 1 / population[i].aptitude!;
+  }
+
+  population.forEach((gene) => {
+    if (gene.aptitude !== 0) gene.probability = 1 / gene.aptitude! / divider;
+    else gene.probability = 0;
+  });
+};
+
+export const selectGenes = (genes: Pair[]) => {
+  let length = genes.length / 2;
+
+  for (let i = 0; i < length; i++) {
+    const min = Math.min(...genes.map((item) => item.probability!));
+    const pos = genes.map((e) => e.probability).indexOf(min);
+    genes.splice(pos, 1);
+  }
+};
