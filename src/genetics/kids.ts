@@ -43,6 +43,6 @@ export const generateKids = (fathers: Pair[], mutationRate: number) => {
  * @returns Gene com mutação
  */
 export const mutation = (gene: Pair) => {
-  gene.X = gene.X & 1;
-  gene.Y = gene.Y & 1;
+  gene.X = gene.X & Math.floor(Math.random() * 8);
+  gene.Y = gene.Y & Math.floor(Math.random() * 8);
 };

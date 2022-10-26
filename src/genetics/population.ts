@@ -35,16 +35,44 @@ export const populationRating = (population: Pair[]) => {
 
   population.forEach((gene) => {
     if (gene.aptitude !== 0) gene.probability = 1 / gene.aptitude! / divider;
-    else gene.probability = 0;
+    else gene.probability = 1;
   });
 };
 
 export const selectGenes = (genes: Pair[]) => {
+  sortGenes(genes);
+  let sum = sumAptitude(genes);
+
   let length = genes.length / 2;
+  let newGenes: Pair[] = [];
+
+  let probability: number;
 
   for (let i = 0; i < length; i++) {
-    const min = Math.min(...genes.map((item) => item.probability!));
-    const pos = genes.map((e) => e.probability).indexOf(min);
-    genes.splice(pos, 1);
+    probability = Math.random() * sum[sum.length - 1];
+
+    for (let i = 0; i < genes.length; i++) {
+      if (sum[i] > probability) {
+        newGenes.push(genes[i]);
+        break;
+      }
+    }
   }
+  genes.splice(0, genes.length, ...newGenes);
+};
+
+export const sortGenes = (genes: Pair[]) => {
+  genes.sort((a, b) => b.probability! - a.probability!);
+};
+
+const sumAptitude = (genes: Pair[]): number[] => {
+  let sum = 0;
+  let matriz: number[] = [];
+
+  for (let i = 0; i < genes.length; i++) {
+    sum += genes[i].aptitude!;
+    matriz.push(sum);
+  }
+
+  return matriz;
 };

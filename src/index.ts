@@ -3,17 +3,47 @@ import { generatePopulation, populationRating, selectGenes } from "./genetics/po
 
 let population = generatePopulation(4);
 
-console.clear();
+let breakCondition = false;
 
 populationRating(population);
 console.log("População Inicial");
 console.log(population);
 
-selectGenes(population);
-console.log("Genes Selecionados");
-console.log(population);
+while (breakCondition == false) {
+  selectGenes(population);
+  console.log("Genes Selecionados");
+  console.log(population);
 
-console.log("Filhos Gerados");
-generateKids(population, 10);
-populationRating(population);
-console.log(population);
+  console.log("Filhos Gerados");
+  generateKids(population, 25);
+  populationRating(population);
+  console.log(population);
+
+  for (let i = 0; i < population.length; i++) {
+    if (population[i].X == 0 && population[i].Y == 0) {
+      breakCondition = true;
+    }
+  }
+
+  if (breakCondition == false) {
+    console.log("\nRetorne para a seleção de indivíduos.\n");
+  }
+}
+
+console.log("\nO indivíduo satisfaz os requerimentos de parada.\n");
+
+// let population = generatePopulation(4);
+
+// populationRating(population);
+// console.log("População Inicial");
+// console.log(population);
+
+// selectGenes(population);
+
+// console.log("Genes Selecionados");
+// console.log(population);
+
+// console.log("Filhos Gerados");
+// generateKids(population, 25);
+// populationRating(population);
+// console.log(population);
