@@ -6,20 +6,33 @@ import { generatePopulation, populationRating, selectGenes } from "./genetics/po
 (async () => {
   let population = await generatePopulation(4);
 
-  console.clear();
+  let breakCondition = false;
 
   await populationRating(population);
   console.log("População Inicial");
   console.log(population);
 
-  await selectGenes(population);
-  console.log("Genes Selecionados");
-  console.log(population);
-
-  console.log("Filhos Gerados");
-  await generateKids(population, 10);
-  await populationRating(population);
-  console.log(population);
+  while(breakCondition == false) {
+    for(let i = 0; i < 4; i++) {
+      if(population[i].X == 0 && population[i].Y == 0) {
+        breakCondition = true;
+      }
+    }
+    if(breakCondition == false) {
+      await selectGenes(population);
+      console.log("Genes Selecionados");
+      console.log(population);
+      
+      console.log("Filhos Gerados");
+      await generateKids(population, 10);
+      await populationRating(population);
+      console.log(population);
+      
+      console.log("O indivíduo satisfaz os requerimentos de desempenho.");
+    } else {
+      console.log("Retorne para a seleção de indivíduos.")
+    }
+  }
 })();
 
 // let teste: Pair = { X: 0, Y: 0 };
