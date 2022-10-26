@@ -6,7 +6,7 @@ import { calculeF } from "../utils/math";
  * @param numberPopulation Quantidade de indivíduos na População inicial
  * @returns População - array de Pair
  */
-export const generatePopulation = (numberPopulation: number): Pair[] => {
+export const generatePopulation = async (numberPopulation: number): Promise<Pair[]> => {
   const pairs: Pair[] = [];
 
   for (let index = 0; index < numberPopulation; index++) {
@@ -19,7 +19,7 @@ export const generatePopulation = (numberPopulation: number): Pair[] => {
   return pairs;
 };
 
-export const populationRating = (population: Pair[]) => {
+export const populationRating = async (population: Pair[]) => {
   //Calculando a aptidão de cada gene
   population.forEach((gene) => {
     gene.aptitude = calculeF(gene);
@@ -75,4 +75,6 @@ const sumAptitude = (genes: Pair[]): number[] => {
   }
 
   return matriz;
+
+
 };

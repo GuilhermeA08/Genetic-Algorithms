@@ -6,7 +6,7 @@ import { Pair } from "@src/types/Pair";
  * @param mutationRate Taxa de mutação
  * @returns População com pais e filhos
  */
-export const generateKids = (fathers: Pair[], mutationRate: number) => {
+export const generateKids = async (fathers: Pair[], mutationRate: number) => {
   try {
     if (fathers.length % 2 !== 0) throw new Error("O número de pais de ser Par!");
 
@@ -29,7 +29,7 @@ export const generateKids = (fathers: Pair[], mutationRate: number) => {
 
     for (const key in fathers) {
       if (Math.floor(Math.random() * 100) + 1 <= mutationRate) {
-        mutation(fathers[key]);
+        await mutation(fathers[key]);
       }
     }
   } catch (error) {
@@ -45,4 +45,5 @@ export const generateKids = (fathers: Pair[], mutationRate: number) => {
 export const mutation = (gene: Pair) => {
   gene.X = gene.X & Math.floor(Math.random() * 8);
   gene.Y = gene.Y & Math.floor(Math.random() * 8);
+
 };

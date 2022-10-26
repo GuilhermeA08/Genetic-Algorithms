@@ -1,13 +1,19 @@
 import { generateKids } from "./genetics/kids";
 import { generatePopulation, populationRating, selectGenes } from "./genetics/population";
+// import { Pair } from "./types/Pair";
+// import { calculeF } from "./utils/math";
 
-let population = generatePopulation(4);
+(async () => {
+  let population = await generatePopulation(4);
+
 
 let breakCondition = false;
 
-populationRating(population);
-console.log("População Inicial");
-console.log(population);
+
+  await populationRating(population);
+  console.log("População Inicial");
+  console.log(population);
+
 
 while (breakCondition == false) {
   selectGenes(population);
@@ -47,3 +53,5 @@ console.log("\nO indivíduo satisfaz os requerimentos de parada.\n");
 // generateKids(population, 25);
 // populationRating(population);
 // console.log(population);
+
+
