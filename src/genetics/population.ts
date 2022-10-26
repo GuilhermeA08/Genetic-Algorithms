@@ -40,11 +40,24 @@ export const populationRating = async (population: Pair[]) => {
 };
 
 export const selectGenes = async (genes: Pair[]) => {
-  let length = genes.length / 2;
+  sortPopulation(genes);
 
-  for (let i = 0; i < length; i++) {
-    const min = Math.min(...genes.map((item) => item.probability!));
-    const pos = genes.map((e) => e.probability).indexOf(min);
-    genes.splice(pos, 1);
+  let length = genes.length / 2;
+  let newPopulation: Pair[] = [];
+
+  for (let index = 0; index < length; index++) {
+    const probability = Math.floor(Math.random() * 101);
+    for (let gene of genes) {
+      if (probability < gene.probability!) {
+        newPopulation.push(gene);
+        break;
+      }
+    }
   }
+
+  genes = newPopulation;
+};
+
+export const sortPopulation = (population: Pair[]) => {
+  population.sort((a, b) => b.probability! - a.probability!);
 };
